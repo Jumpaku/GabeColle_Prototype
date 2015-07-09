@@ -9,7 +9,8 @@
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
+# Jumpaku changed 
+#[Rr]elease/
 x64/
 build/
 bld/
@@ -29,6 +30,7 @@ TestResult.xml
 
 # Build Results of an ATL Project
 [Dd]ebugPS/
+
 [Rr]eleasePS/
 dlldata.c
 
