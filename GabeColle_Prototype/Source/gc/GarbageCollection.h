@@ -5,6 +5,7 @@
 #include"Relation.h"
 #include"Memory.h"
 
+namespace gc {
 
 template<class DerivedObject>
 class Memory;
@@ -47,4 +48,4 @@ public:
 	}
 };
 
-
+}

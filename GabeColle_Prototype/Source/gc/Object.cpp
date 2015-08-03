@@ -3,6 +3,7 @@
 
 # include <Siv3D.hpp>
 
+using namespace gc;
 
 bool Object::exists()const
 {

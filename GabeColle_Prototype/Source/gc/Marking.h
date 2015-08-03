@@ -2,6 +2,7 @@
 
 #include<vector>
 
+namespace gc {
 
 class Marking
 {
@@ -16,3 +17,5 @@ public:
 	void unmark(Address_t address);
 	bool isMarked(Address_t address)const;
 };
+
+}

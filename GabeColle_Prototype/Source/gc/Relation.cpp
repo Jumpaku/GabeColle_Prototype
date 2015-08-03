@@ -1,5 +1,6 @@
 #include"Relation.h"
 
+using namespace gc;
 
 Relation::Relation(Address_t size)
 {

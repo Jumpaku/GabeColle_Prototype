@@ -26,7 +26,7 @@ Controller::Controller() :gui_m(GUIStyle::Default)
 	gui_m.addln(L"ob", GUIText::Create(ToString(0) + L" : address out of bounds"));
 }
 
-void Controller::update(Memory<CircleObject> &memory)
+void Controller::update(gc::Memory<CircleObject> &memory)
 {
 	if (gui_m.button(L"alloc").pushed) {
 		int p = memory.alloc();

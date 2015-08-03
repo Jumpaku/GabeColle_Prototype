@@ -1,5 +1,6 @@
 #include"Marking.h"
 
+using namespace gc;
 
 Marking::Marking(int size)
 	:map_m(size, false)

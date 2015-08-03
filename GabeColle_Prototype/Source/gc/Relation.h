@@ -2,6 +2,7 @@
 
 #include<vector>
 
+namespace gc {
 
 class Relation
 {
@@ -16,3 +17,5 @@ public:
 	void unlink(Address_t from, Address_t to);
 	bool areLinked(Address_t from, Address_t to)const;
 };
+
+}

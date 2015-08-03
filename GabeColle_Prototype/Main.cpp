@@ -5,7 +5,7 @@
 #include"Source\Controller.h"
 
 
-void viewMemory(Memory<CircleObject> &memory);
+void viewMemory(gc::Memory<CircleObject> &memory);
 
 void Main()
 {
@@ -15,7 +15,7 @@ void Main()
 	Window::Centering();	
 	
 	Font font;
-	Memory<CircleObject> m(10 + 1);
+	gc::Memory<CircleObject> m(10 + 1);
 	Controller gui;
 	
 	m.root().center({ 150.0, Window::Height() / 2.0 });
@@ -27,7 +27,7 @@ void Main()
 }
 
 
-void viewMemory(Memory<CircleObject> &memory)
+void viewMemory(gc::Memory<CircleObject> &memory)
 {
 	static Font font;
 	font.drawCenter(L"Root", Circle(memory.root().center(), 50.0).draw(Palette::Aqua).center);

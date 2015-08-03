@@ -2,7 +2,7 @@
 #include "gc\Object.h"
 #include <Siv3D.hpp>
 
-class CircleObject : public Object
+class CircleObject : public gc::Object
 {
 	double x_m;
 	double y_m;

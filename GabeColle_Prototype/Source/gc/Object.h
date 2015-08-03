@@ -1,8 +1,10 @@
 #pragma once
 
+namespace gc {
 
 template<class DerivedObject>
 class Memory;
+
 
 class Object
 {
@@ -15,3 +17,5 @@ private:
 	void construct();
 	void destruct();
 };
+
+}
