@@ -1,6 +1,6 @@
-#include "Controller.h"
-#include"Memory.h"
-
+#include"Controller.h"
+#include"gc\Memory.h"
+#include"CircleObject.h"
 
 Controller::Controller() :gui_m(GUIStyle::Default)
 {
@@ -26,7 +26,7 @@ Controller::Controller() :gui_m(GUIStyle::Default)
 	gui_m.addln(L"ob", GUIText::Create(ToString(0) + L" : address out of bounds"));
 }
 
-void Controller::update(Memory &memory)
+void Controller::update(Memory<CircleObject> &memory)
 {
 	if (gui_m.button(L"alloc").pushed) {
 		int p = memory.alloc();
@@ -44,7 +44,6 @@ void Controller::update(Memory &memory)
 		else if (gui_m.button(L"unlink").pushed) {
 			memory.unlink(FromString<int>(from), FromString<int>(to));
 		}
-
 	}
 	if (gui_m.button(L"gc").pushed) {
 		memory.gc();
