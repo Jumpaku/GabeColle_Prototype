@@ -4,7 +4,7 @@ using namespace gc;
 
 Relation::Relation(Address_t size)
 {
-	relation_m = std::move(std::vector<std::vector<bool>>(size + 1, std::vector<bool>(size + 1, false)));
+	relation_m = std::move(std::vector<std::vector<bool>>(size, std::vector<bool>(size, false)));
 }
 void Relation::link(Address_t from, Address_t to)
 {

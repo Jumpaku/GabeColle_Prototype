@@ -5,7 +5,7 @@
 #include"Source\Controller.h"
 
 
-void viewMemory(gc::Memory<CircleObject> &memory);
+void drawMemory(gc::Memory<CircleObject> &memory);
 
 void Main()
 {
@@ -22,12 +22,12 @@ void Main()
 
 	while (System::Update()) {
 		gui.update(m);
-		viewMemory(m);
+		drawMemory(m);
 	}
 }
 
 
-void viewMemory(gc::Memory<CircleObject> &memory)
+void drawMemory(gc::Memory<CircleObject> &memory)
 {
 	static Font font;
 	font.drawCenter(L"Root", Circle(memory.root().center(), 50.0).draw(Palette::Aqua).center);

@@ -167,6 +167,7 @@
     <Xml Include="Engine\objdetect\facePhoto.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\gc\Error.h" />
     <ClInclude Include="Source\gc\Marking.h" />
     <ClInclude Include="Source\gc\Relation.h" />
     <ClInclude Include="Source\gc\Object.h" />
