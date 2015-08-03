@@ -32,6 +32,7 @@ void drawMemory(gc::Memory<CircleObject> &memory)
 	static Font font;
 	font.drawCenter(L"Root", Circle(memory.root().center(), 50.0).draw(Palette::Aqua).center);
 
+	//オブジェクトを描く
 	auto drawCircle = [&memory] (int address)
 	{
 		double const r = 40.0;
@@ -53,6 +54,7 @@ void drawMemory(gc::Memory<CircleObject> &memory)
 		drawCircle(i);
 	}
 
+	//ルートからの参照を描く
 	auto rm = memory.getRelation();
 	for (int j(1); j < memory.size(); ++j) {
 		if (rm.areLinked(0, j)) {
@@ -63,6 +65,7 @@ void drawMemory(gc::Memory<CircleObject> &memory)
 		}
 	}
 
+	//オブジェクト同士の参照を描く
 	auto drawArrow = [&memory] (int i, int j)
 	{
 		auto rm = memory.getRelation();
