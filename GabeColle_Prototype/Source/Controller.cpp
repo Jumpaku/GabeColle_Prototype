@@ -1,6 +1,6 @@
-#include "Controller.h"
-#include"Memory.h"
-
+#include"Controller.h"
+#include"gc\Memory.h"
+#include"CircleObject.h"
 
 Controller::Controller() :gui_m(GUIStyle::Default)
 {
@@ -26,7 +26,7 @@ Controller::Controller() :gui_m(GUIStyle::Default)
 	gui_m.addln(L"ob", GUIText::Create(ToString(0) + L" : address out of bounds"));
 }
 
-void Controller::update(Memory &memory)
+void Controller::update(gc::Memory<CircleObject> &memory)
 {
 	if (gui_m.button(L"alloc").pushed) {
 		int p = memory.alloc();
@@ -34,17 +34,13 @@ void Controller::update(Memory &memory)
 			memory.access(p).center(RandomVec2({ 200, 600 }, { 50, Window::Height() - 50 }));
 		}
 	}
-	auto from = gui_m.textField(L"from").text;
-	auto to = gui_m.textField(L"to").text;
-	if (std::regex_match(from.str(), std::wregex(L"^[0-9]$|^[1-9][0-9]$|^100$")) &&
-		std::regex_match(to.str(), std::wregex(L"^[0-9]$|^[1-9][0-9]$|^100$"))) {
-		if (gui_m.button(L"link").pushed) {
-			memory.link(FromString<int>(from), FromString<int>(to));
-		}
-		else if (gui_m.button(L"unlink").pushed) {
-			memory.unlink(FromString<int>(from), FromString<int>(to));
-		}
-
+	int from = FromString<int>(gui_m.textField(L"from").text);
+	int to = FromString<int>(gui_m.textField(L"to").text);
+	if (gui_m.button(L"link").pushed) {
+		memory.link(from, to);
+	}
+	else if (gui_m.button(L"unlink").pushed) {
+		memory.unlink(from, to);
 	}
 	if (gui_m.button(L"gc").pushed) {
 		memory.gc();

@@ -1,10 +1,11 @@
-﻿
-# include <Siv3D.hpp>
+﻿# include <Siv3D.hpp>
 
-#include"Source\Memory.h"
+#include"Source\gc\Memory.h"
+#include"Source\CircleObject.h"
 #include"Source\Controller.h"
 
-void viewMemory(Memory &memory);
+
+void drawMemory(gc::Memory<CircleObject> &memory);
 
 void Main()
 {
@@ -14,23 +15,24 @@ void Main()
 	Window::Centering();	
 	
 	Font font;
-	Memory m(10 + 1);
+	gc::Memory<CircleObject> m(10 + 1);
 	Controller gui;
 	
 	m.root().center({ 150.0, Window::Height() / 2.0 });
 
 	while (System::Update()) {
 		gui.update(m);
-		viewMemory(m);
+		drawMemory(m);
 	}
 }
 
 
-void viewMemory(Memory &memory)
+void drawMemory(gc::Memory<CircleObject> &memory)
 {
 	static Font font;
 	font.drawCenter(L"Root", Circle(memory.root().center(), 50.0).draw(Palette::Aqua).center);
 
+	//オブジェクトを描く
 	auto drawCircle = [&memory] (int address)
 	{
 		double const r = 40.0;
@@ -52,20 +54,22 @@ void viewMemory(Memory &memory)
 		drawCircle(i);
 	}
 
+	//ルートからの参照を描く
 	auto rm = memory.getRelation();
 	for (int j(1); j < memory.size(); ++j) {
-		if (rm.isUsing(0, j)) {
+		if (rm.areLinked(0, j)) {
 			Line(memory.root().center(), memory.access(j).center()).drawArrow(4, { 20, 50 }, Color(Palette::Yellow, 128));
 		}
-		else if (rm.isUsing(j, 0))		{
+		else if (rm.areLinked(j, 0))		{
 			Line(memory.access(j).center(), memory.root().center()).drawArrow(4, { 20, 50 }, Color(Palette::Yellow, 128));
 		}
 	}
 
+	//オブジェクト同士の参照を描く
 	auto drawArrow = [&memory] (int i, int j)
 	{
 		auto rm = memory.getRelation();
-		if (rm.isUsing(i, j)) {
+		if (rm.areLinked(i, j)) {
 			Vec2 const &iCenter = memory.access(i).center();
 			Vec2 const &jCenter = memory.access(j).center();
 			Color clr = Color(Palette::Yellow, 128);
